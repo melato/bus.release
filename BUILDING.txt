@@ -1,0 +1,29 @@
+The code for Athens Next Bus is divided in 9 submodules, each of which has its oown git repository.  This project is used to build everything.
+There are two Android projects:
+
+melato.android.lib
+	Contains common code shared by an other application.
+	Uses:
+		xml
+		gps
+		progress
+		util
+
+bus.android
+	The final Athens Next Bus app.
+	Uses:
+		melato.android.lib
+		gpx
+		geometry
+		bus
+
+To build in Eclipse:
+	Open each of the two android projects.  
+	If necessary, link the source folders for the dependent projects.
+
+To build from the command line (on linux), execute:
+build-lib.sh
+build.sh
+
+These are the build scripts that I use to make the production apk.
+They are not meant to be fool-proof and they may need to be tweaked for your installation

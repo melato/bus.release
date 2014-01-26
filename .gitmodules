@@ -1,0 +1,36 @@
+[submodule "projects/xml"]
+	path = projects/xml
+	url = https://github.com/melato/xml.git
+[submodule "projects/melato.android.lib"]
+	path = projects/melato.android.lib
+	url = https://github.com/melato/melato.android.lib.git
+[submodule "projects/java/xml"]
+	path = projects/java/xml
+	url = git:java/xml.git
+[submodule "projects/gps"]
+	path = projects/gps
+	url = https://github.com/melato/gps.git
+[submodule "projects/melato.progress"]
+	path = projects/melato.progress
+	url = git:melato.progress.git
+[submodule "projects/melato.util"]
+	path = projects/melato.util
+	url = git:melato.util.git
+[submodule "projects/bus.android"]
+	path = projects/bus.android
+	url = https://github.com/melato/bus.android.git
+[submodule "projects/gpx"]
+	path = projects/gpx
+	url = https://github.com/melato/gpx.git
+[submodule "projects/geometry"]
+	path = projects/geometry
+	url = https://github.com/melato/geometry.git
+[submodule "projects/bus"]
+	path = projects/bus
+	url = https://github.com/melato/bus.git
+[submodule "projects/progress"]
+	path = projects/progress
+	url = https://github.com/melato/progress.git
+[submodule "projects/util"]
+	path = projects/util
+	url = https://github.com/melato/util.git

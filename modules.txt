@@ -1,0 +1,9 @@
+git submodule add https://github.com/melato/melato.android.lib.git projects/melato.android.lib
+git submodule add https://github.com/melato/xml.git projects/xml
+git submodule add https://github.com/melato/gps.git projects/gps
+git submodule add https://github.com/melato/progress.git projects/progress
+git submodule add https://github.com/melato/util.git projects/util
+git submodule add https://github.com/melato/bus.android.git projects/bus.android
+git submodule add https://github.com/melato/gpx.git projects/gpx
+git submodule add https://github.com/melato/geometry.git projects/geometry
+git submodule add https://github.com/melato/bus.git projects/bus
