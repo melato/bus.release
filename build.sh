@@ -11,7 +11,7 @@ update_map_key()
 copy_source() {
 	mkdir -p target/android/src
 	rsync -a -v --exclude=.git projects/bus.android/ target/android
-	for project in gpx geometry bus
+	for project in geometry bus
 	do
 		rsync -a -v projects/$project/src/main/java/ target/android/src
 	done

@@ -19,9 +19,6 @@
 [submodule "projects/bus.android"]
 	path = projects/bus.android
 	url = https://github.com/melato/bus.android.git
-[submodule "projects/gpx"]
-	path = projects/gpx
-	url = https://github.com/melato/gpx.git
 [submodule "projects/geometry"]
 	path = projects/geometry
 	url = https://github.com/melato/geometry.git
