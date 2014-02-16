@@ -13,7 +13,6 @@ bus.android
 	The final Athens Next Bus app.
 	Uses:
 		melato.android.lib
-		gpx
 		geometry
 		bus
 
@@ -27,3 +26,12 @@ build.sh
 
 These are the build scripts that I use to make the production apk.
 They are not meant to be fool-proof and they may need to be tweaked for your installation
+
+Icons:
+The app source code contains only the mdpi icons.
+I generate all the icons in various densities from .svg files and add them
+to ./external/res/drawable-* folders in this directory, before running build.sh.
+
+I have not published the .svg icon files yet.
+They are taken or adapted from open source icons, or created by me.
+

@@ -17,6 +17,11 @@ copy_source() {
 	done
 }
 
+copy_external() {
+	mkdir -p target/android
+	rsync -a -v external/ target/android
+}
+
 compile() {
 	cd target/android
 	android update project --path `pwd` --subprojects --target 'Google Inc.:Google APIs:19' --subprojects -l ../melato.android.lib
@@ -25,5 +30,6 @@ compile() {
 
 rm -rf target/android
 copy_source
+copy_external
 update_map_key
 compile
