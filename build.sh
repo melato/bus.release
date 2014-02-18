@@ -19,6 +19,7 @@ copy_source() {
 
 copy_external() {
 	mkdir -p target/android
+	mkdir -p external
 	rsync -a -v external/ target/android
 }
 
