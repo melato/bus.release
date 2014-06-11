@@ -1,0 +1,147 @@
+<project name="nextbus"
+	basedir="."
+	>
+
+	<!-- This is to replace build.sh -->
+
+	<property prefix="nextbus" file="nextbus.env"/>
+	<property name="build.dir" value="${basedir}/target"/>
+	<property name="app.dir" value="${build.dir}/android"/>
+	<property name="lib.dir" value="${build.dir}/melato.android.lib"/>
+
+	<dirname file="${ant.nextbus}" property="this.dir"/>
+
+	<target name="clean">
+		<delete dir="${build.dir}"/>
+	</target>
+
+	<!-- melato.android.lib -->
+	<target name="lib.libs">
+		<mkdir dir="${lib.dir}/libs"/>
+		<copy todir="${lib.dir}/libs">
+			<fileset file="${nextbus.ANDROID_SDK_DIR}/extras/android/support/v4/android-support-v4.jar"/>
+		</copy>
+	</target>
+
+	<target name="lib.source">
+		<mkdir dir="${lib.dir}"/>
+		<copy todir="${lib.dir}">
+			<fileset dir="projects/melato.android.lib" excludes=".git/*"/>
+		</copy>
+		<copy todir="${lib.dir}/src">
+			<fileset dir="projects/gps/src/main/java"/>
+			<fileset dir="projects/util/src/main/java"/>
+			<fileset dir="projects/xml/src/main/java"/>
+			<fileset dir="projects/progress/src/main/java"/>
+		</copy>
+	</target>
+
+	<target name="lib.update">
+		<exec executable="android"
+			dir="${lib.dir}">
+			<arg value="update"/>
+			<arg value="project"/>
+			<arg value="--path"/>
+			<arg value="${lib.dir}"/>
+			<arg value="--target"/>
+			<arg value="android-19"/>
+			<arg value="--subprojects"/>
+		</exec>
+	</target>
+
+	<target name="lib.compile">
+		<ant dir="${lib.dir}" target="release"/>
+	</target>
+
+	<target name="lib.package" depends="lib.libs,lib.source,lib.update,lib.compile"
+		description="build library project"
+		>
+	</target>
+
+	<!-- icons -->
+	<target name="icons">
+		<ant dir="projects/bus.icons" target="app.icons">
+			<property name="overwrite" value="true"/>
+			<property name="app.dir" value="${this.dir}/external"/>
+			<property name="script" value="${build.dir}/icons.sh"/>
+		</ant>
+		<exec executable="sh">
+			<arg value="${build.dir}/icons.sh"/>
+		</exec>
+	</target>
+
+	<!-- bus.android -->
+
+	<target name="app.source">
+		<mkdir dir="${app.dir}"/>
+		<copy todir="${app.dir}">
+			<fileset dir="projects/bus.android" excludes=".git/*"/>
+		</copy>
+		<copy todir="${app.dir}/src">
+			<fileset dir="projects/bus/src/main/java"/>
+			<fileset dir="projects/geometry/src/main/java"/>
+		</copy>
+	</target>
+
+	<target name="app.external"
+		description="copy resources from ./external">
+		<mkdir dir="${app.dir}"/>
+		<copy todir="${app.dir}">
+			<fileset dir="external">
+				<include name="**/*"/>
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="map.key"
+		description="replace map api key with production value">
+		<mkdir dir="${app.dir}/res/values"/>
+		<copy
+			overwrite="true"
+			tofile="${app.dir}/res/values/keys.xml"
+			file="keys-template.xml">
+			<filterset>
+				<filter token="MAP_KEY" value="${nextbus.MAP_KEY}"/>
+			</filterset>
+		</copy>
+	</target>
+
+	<target name="res"
+		description="replace release resources">
+		<mkdir dir="${app.dir}/res/values"/>
+		<copy
+			overwrite="true"
+			todir="${app.dir}/res">
+			<fileset dir="res"/>
+		</copy>
+	</target>
+
+	<target name="app.update">
+		<exec executable="android"
+			dir="${app.dir}">
+			<arg value="update"/>
+			<arg value="project"/>
+			<arg value="--path"/>
+			<arg value="${app.dir}"/>
+			<arg value="--subprojects"/>
+			<arg value="--target"/>
+			<arg value="Google Inc.:Google APIs:19"/>
+			<arg value="-l"/>
+			<arg value="../melato.android.lib"/>
+		</exec>
+	</target>
+
+	<target name="app.compile">
+		<ant dir="${app.dir}" target="release"/>
+	</target>
+
+	<target name="app.package" depends="app.source,map.key,app.external,app.update,app.compile"
+		description="build apk, provided lib is already built."
+		>
+	</target>
+
+	<target name="package" depends="lib.package,app.package"
+		description="build apk from scratch"
+		/>
+
+</project>
